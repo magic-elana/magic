@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.magic.elana;
 
 import org.junit.Test;
 

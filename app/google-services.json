@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "76980434027",
+    "firebase_url": "https://jiaolongyu.firebaseio.com",
+    "project_id": "jiaolongyu",
+    "storage_bucket": "jiaolongyu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76980434027:android:bec6dd13fd746d13daad2e",
+        "android_client_info": {
+          "package_name": "com.magic.elana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76980434027-g72ekucjommitfohnav5ci2c0thrcgqc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQu3-qyULxht-iXWnUn8gir0OVXLvMAAw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "76980434027-g72ekucjommitfohnav5ci2c0thrcgqc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
