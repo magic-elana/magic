@@ -21,4 +21,7 @@ public abstract class Comment {
         return map;
     }
 
+    public static Comment fromMap(Map<String, Object> map) {
+        return Comment.create(map.get(CONTENT_KEY).toString());
+    }
 }
