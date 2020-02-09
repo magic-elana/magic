@@ -2,10 +2,6 @@ package com.magic.elana.data;
 
 import com.google.auto.value.AutoValue;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @AutoValue
 public abstract class Post {
     public static final String TITLE_KEY = "title";
@@ -14,10 +10,11 @@ public abstract class Post {
 
     public abstract String title();
     public abstract String content();
-    public abstract List<Comment> comments();
+    public abstract String id();
 
     public static Builder builder() {
-        return new AutoValue_Post.Builder();
+        return new AutoValue_Post.Builder()
+                .id(RandomStringGenerator.generate(10));
     }
 
 
@@ -27,7 +24,7 @@ public abstract class Post {
 
         public abstract Builder content(String content);
 
-        public abstract Builder comments(List<Comment> comments);
+        abstract Builder id(String id);
 
         public abstract Post build();
     }

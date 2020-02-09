@@ -1,5 +1,6 @@
 package com.magic.elana.data.database;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -12,6 +13,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.magic.elana.data.Comment;
 import com.magic.elana.data.Post;
+import com.magic.elana.data.database.local.LocalDatabase;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -21,6 +23,11 @@ import java.util.Map;
 public class DatabaseImpl implements DataBase {
     private static final String TAG = "Database";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    LocalDatabase localDatabase;
+
+    public DatabaseImpl(Context context) {
+        localDatabase = LocalDatabase.getDatabase(context);
+    }
 
     @Override
     public void addPost(final Post post) {
@@ -29,6 +36,8 @@ public class DatabaseImpl implements DataBase {
         Map<String, Object> user = new HashMap<>();
         user.put(Post.TITLE_KEY, post.title());
         user.put(Post.CONTENT_KEY, post.content());
+        localDatabase.getPostDao().insert(
+                com.magic.elana.data.database.local.Post.getFromModel(post));
 
         // Add a new document with a generated ID
         db.collection("posts")
@@ -42,18 +51,6 @@ public class DatabaseImpl implements DataBase {
                                     db.collection("posts")
                                             .document(task.getResult().getId())
                                             .collection(Post.REPLY_KEY);
-
-                            for (Comment comment : post.comments()) {
-                                repliesReference.add(comment.toMap())
-                                        .addOnCompleteListener(
-                                                new OnCompleteListener<DocumentReference>() {
-                                    @Override
-                                    public void onComplete(Task<DocumentReference> task) {
-                                        Log.d(TAG, "Added comment with id: " + task.getResult().getId() + ". ");
-                                    }
-                                });
-                            }
-
                         }
                     }
                 })
