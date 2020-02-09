@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "posts")
 public class Post {
     @PrimaryKey(autoGenerate = true)
-    public String uid;
+    public Long uid;
 
     public String title;
 
@@ -18,7 +18,7 @@ public class Post {
         Post localPost = new Post();
         localPost.title = post.title();
         localPost.content = post.content();
-        localPost.uid = post.id();
+        localPost.uid = Long.valueOf(post.id());
         localPost.synced = false;
         return localPost;
     }

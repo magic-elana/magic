@@ -63,6 +63,11 @@ public class DatabaseImpl implements DataBase {
     }
 
     @Override
+    public void addComment(String postId, Comment comment) {
+
+    }
+
+    @Override
     public List<Post> readFirstPage(int pageSize) {
         db.collection("posts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

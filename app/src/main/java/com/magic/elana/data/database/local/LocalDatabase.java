@@ -10,7 +10,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = { Post.class },
-        version = 1)
+        version = 1,
+exportSchema = false)
 public abstract class LocalDatabase extends RoomDatabase {
     public abstract PostDao getPostDao();
 
