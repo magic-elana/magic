@@ -14,6 +14,14 @@
         android:text="title"
         android:layout_gravity="center"
         android:textSize="30sp"/>
+
+    <Button
+        android:id="@+id/button"
+        android:background="@drawable/saved_button_in_homefragment"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="right"/>
+
     <TextView
         android:id="@+id/content"
         android:layout_width="wrap_content"

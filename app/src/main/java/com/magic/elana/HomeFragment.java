@@ -54,6 +54,7 @@ public class HomeFragment extends Fragment {
 //        other classes can access because public
         public TextView title;
         public TextView content;
+        public Button button;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -66,6 +67,7 @@ public class HomeFragment extends Fragment {
 
             title = (TextView) itemView.findViewById(R.id.title);
             content = (TextView) itemView.findViewById(R.id.content);
+            button = (Button) itemView.findViewById(R.id.button);
         }
     }
 //each post has title, content
@@ -104,12 +106,21 @@ public class HomeFragment extends Fragment {
 //        get the data from that view so the data shows up
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             Post post = postList.get(position);
-
+            View.OnClickListener clickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean if_clicked = v.isSelected();
+//                    flip the value of if clicked
+                    v.setSelected(!if_clicked);
+                }
+            };
             // Set item views based on your views and data model
             TextView titletextview = holder.title;
             titletextview.setText(post.title());
             TextView contenttextview = holder.content;
             contenttextview.setText(post.content());
+
+            holder.button.setOnClickListener(clickListener);
         }
 
         @Override
