@@ -39,3 +39,5 @@ public class SavedFragment extends Fragment {
 
 //to important option enter
 //comments are command slash
+
+//new adapter, new view holder, configure the recycler view using new adapter, same on_view_adapter

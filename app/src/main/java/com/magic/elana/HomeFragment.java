@@ -24,6 +24,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+//        loads the layout
         return inflater.inflate(R.layout.home_fragment, container, false);
 
     }
@@ -40,6 +41,7 @@ public class HomeFragment extends Fragment {
         RecyclerView viewcreated = view.findViewById(R.id.rvContacts);
 //        constructor PostsAdapter used to create an instance of that class
 //        adapter knows the data and how to render each item
+//        set own post adapter to saved fragment
         viewcreated.setAdapter(new PostsAdapter(postList));
 //        linear layout manager: one item per row or column
 //        grid layout manager: grid view
@@ -59,7 +61,7 @@ public class HomeFragment extends Fragment {
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
 //        this has no return type because it is a constructor same name as the class
-
+// need this for saved fragment
         public ViewHolder(View itemView) {
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
@@ -75,6 +77,8 @@ public class HomeFragment extends Fragment {
         private List<Post> postList;
 
         // Pass in the contact array into the constructor
+//    you need adapter for saved fragment
+
         public PostsAdapter(List<Post> posts) {
             postList = posts;
         }
