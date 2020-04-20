@@ -1,22 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#7F8586">
+
     <EditText
         android:id="@+id/write"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:padding="10dp"
         android:layout_width="wrap_content"/>
 
     <Button
         android:id="@+id/button"
         android:layout_width="145dp"
         android:layout_height="78dp"
+        android:textColor="#000000"
+        android:background="#00BFFF"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:padding="10dp"
         android:text="Post" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/name"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Create your post"-->
+
 
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="38dp"
+        android:background="#8ABECF"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:padding="10dp"
         android:text="Your text will show up here" />
 
 

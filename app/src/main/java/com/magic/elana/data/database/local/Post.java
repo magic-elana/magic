@@ -18,7 +18,6 @@ public class Post {
         Post localPost = new Post();
         localPost.title = post.title();
         localPost.content = post.content();
-        localPost.uid = Long.valueOf(post.id());
         localPost.synced = false;
         return localPost;
     }
