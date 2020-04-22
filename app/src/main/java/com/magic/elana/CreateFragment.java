@@ -45,13 +45,15 @@ public class CreateFragment extends Fragment {
             @Override
             public void onClick(View v) {
 //                defining varible text of type textview and find view with id text and asign value to text variable
-                TextView text = getView().findViewById(R.id.text);
+                TextView title = getView().findViewById(R.id.title);
+                TextView content = getView().findViewById(R.id.content);
 //                TextView name = getView().findViewById(R.id.name)
 //                defining variable writtenText of type string and get the text of variable write and makes it a string asign information to writtenText variable
                 String wrttenText = write.getText().toString();
 //                variable text, function setText, variable writtenText
 //                sets text in writtenText into text
-                text.setText(wrttenText);
+                title.setText(wrttenText);
+                content.setText(wrttenText);
 
             }
         };
