@@ -7,4 +7,13 @@
         android:layout_width="wrap_content"
         android:layout_height="38dp"
         android:text="This is the home fragment" />
+    <Button
+        android:id="@+id/clear"
+        android:text="Clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/content_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

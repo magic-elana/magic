@@ -10,11 +10,10 @@ public abstract class Post {
 
     public abstract String title();
     public abstract String content();
-    public abstract String id();
+    public abstract long timeStamp();
 
     public static Builder builder() {
-        return new AutoValue_Post.Builder()
-                .id(RandomStringGenerator.generate(10));
+        return new AutoValue_Post.Builder();
     }
 
 
@@ -24,7 +23,8 @@ public abstract class Post {
 
         public abstract Builder content(String content);
 
-        abstract Builder id(String id);
+        public abstract Builder timeStamp(long timeStamp);
+
 
         public abstract Post build();
     }
