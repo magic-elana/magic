@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -15,6 +16,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TextView textView = findViewById(R.id.text);
+//
+//        int number = 1;
+//        int number2 = 3;
+//        double d = 1.0;
+//        float f = 1.0f;
+//        String text = "Hello!";
+//
+//        Cup cup1 = new CoffeeCup();
+//        Cup cup2 = new TeaCup();
+//
+//        textView.setText("Pour in: " + cup1.pourIn() + " Pour out: " + cup1.pourOut());
 
         // ---------- BottomNavigation ----------------
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
@@ -46,4 +60,39 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+//    int add(int n1, int n2) {
+//        return n1 + n2;
+//    }
+//
+//    interface Cup {
+//        String pourIn();
+//        String pourOut();
+//    }
+//
+//    class CoffeeCup implements Cup {
+//
+//        @Override
+//        public String pourIn() {
+//            return "Grind Coffee beans, boiled hot water, dripped through coffee powder, put in cup";
+//        }
+//
+//        @Override
+//        public String pourOut() {
+//            return "comes out coffee";
+//        }
+//    }
+//
+//    class TeaCup implements Cup {
+//
+//        @Override
+//        public String pourIn() {
+//            return "Put in tea bag, heat up water";
+//        }
+//
+//        @Override
+//        public String pourOut() {
+//            return "come out tea";
+//        }
+//    }
 }
