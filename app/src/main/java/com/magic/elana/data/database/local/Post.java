@@ -16,12 +16,19 @@ public class Post {
 
     public long timeStamp;
 
-    public static Post getFromModel(com.magic.elana.data.Post post) {
+    public boolean saved;
+
+    public static Post getFromModel(com.magic.elana.data.Post post, boolean isNew,  boolean setSaved) {
         Post localPost = new Post();
         localPost.title = post.title();
         localPost.content = post.content();
         localPost.synced = false;
         localPost.timeStamp = post.timeStamp();
+        localPost.saved = post.saved();
+        if (!isNew) {
+            localPost.uid = post.uid();
+            localPost.saved = setSaved;
+        }
         return localPost;
     }
 }

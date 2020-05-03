@@ -25,4 +25,11 @@ public interface PostDao {
 
     @Query("DELETE FROM posts")
     void deleteAll();
+
+    @Query("SELECT * FROM posts WHERE uid IN (:ids)")
+    LiveData<List<Post>> queryWithIds(List<String> ids);
+
+    @Query("SELECT * FROM posts WHERE saved = 1")
+    LiveData<List<Post>> saved();
+
 }

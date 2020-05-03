@@ -22,6 +22,8 @@ import com.magic.elana.data.database.local.PostRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.magic.elana.data.database.local.Post.getFromModel;
+
 public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,7 +61,9 @@ public class HomeFragment extends Fragment {
                         livePostList.add(com.magic.elana.data.Post.builder()
                                 .title(post.title)
                                 .content(post.content)
-                                .timeStamp(post.timeStamp).build());
+                                .timeStamp(post.timeStamp)
+                                .uid(post.uid)
+                                .saved(post.saved).build());
                     }
                     allLivePost.postValue(livePostList);
                 });
@@ -143,9 +147,8 @@ public class HomeFragment extends Fragment {
             View.OnClickListener clickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    boolean if_clicked = v.isSelected();
-//                    flip the value of if clicked
-                    v.setSelected(!if_clicked);
+                    PostRepository postRepository = new PostRepository(getActivity().getApplication());
+                    postRepository.update(getFromModel(post, false, !post.saved()));
                 }
             };
             // Set item views based on your views and data model
@@ -153,6 +156,11 @@ public class HomeFragment extends Fragment {
             titletextview.setText(post.title());
             TextView contenttextview = holder.content;
             contenttextview.setText(post.content());
+            if (post.saved()) {
+                holder.button.setBackground(getContext().getDrawable(R.drawable.ic_turned_in_black_24dp));
+            } else {
+                holder.button.setBackground(getContext().getDrawable(R.drawable.ic_turned_in_not_black_24dp));
+            }
 
             holder.button.setOnClickListener(clickListener);
         }

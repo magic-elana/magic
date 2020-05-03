@@ -63,7 +63,7 @@ public class CreateFragment extends Fragment {
                         .title(title.getText().toString())
                         .content(content.getText().toString())
                         .timeStamp(SystemClock.currentThreadTimeMillis())
-                        .build()));
+                        .build(), true, false));
 
             }
         };
