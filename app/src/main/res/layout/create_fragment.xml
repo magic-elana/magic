@@ -5,12 +5,20 @@
     android:background="#7F8586">
 
     <EditText
-        android:id="@+id/write"
+        android:id="@+id/write_title"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:padding="10dp"
         android:layout_width="wrap_content"/>
+
+    <EditText
+        android:id="@+id/write_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"/>
 
     <Button
         android:id="@+id/button"
@@ -22,13 +30,6 @@
         android:layout_margin="10dp"
         android:padding="10dp"
         android:text="Post" />
-
-<!--    <TextView-->
-<!--        android:id="@+id/name"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Create your post"-->
-
 
     <TextView
         android:id="@+id/title"

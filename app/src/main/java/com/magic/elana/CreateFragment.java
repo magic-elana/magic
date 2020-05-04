@@ -38,7 +38,8 @@ public class CreateFragment extends Fragment {
 ///        defining the variable button of type Button and find view by id and asign the value to button variable
         Button button = getView().findViewById(R.id.button);
 //        defining the variable write of type EditText, to find view by id and asign the value to write variable
-        final EditText write = getView().findViewById(R.id.write);
+        final EditText write_title = getView().findViewById(R.id.write_title);
+        final EditText write_content = getView().findViewById(R.id.write_content);
 //            defining variable clickListener of type View.OnClickListener and uses the method OnClickListener and asigns it to clickListener
         View.OnClickListener clickListener = new View.OnClickListener() {
             //                this is the onClick method, type is void input is View v
@@ -49,11 +50,12 @@ public class CreateFragment extends Fragment {
                 TextView content = getView().findViewById(R.id.content);
 //                TextView name = getView().findViewById(R.id.name)
 //                defining variable writtenText of type string and get the text of variable write and makes it a string asign information to writtenText variable
-                String wrttenText = write.getText().toString();
+                String writtenTitle = write_title.getText().toString();
+                String writtenContent = write_content.getText().toString();
 //                variable text, function setText, variable writtenText
 //                sets text in writtenText into text
-                title.setText(wrttenText);
-                content.setText(wrttenText);
+                title.setText(writtenTitle);
+                content.setText(writtenContent);
 
             }
         };

@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.TextView;
+//import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView textView = findViewById(R.id.text);
+//        TextView textView = findViewById(R.id.text);
 //
 //        int number = 1;
 //        int number2 = 3;
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
                 };
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+    openFragment(new HomeFragment());
     }
 
     public void openFragment(Fragment fragment) {

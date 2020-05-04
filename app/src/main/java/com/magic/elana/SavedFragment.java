@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,9 +41,14 @@ public class SavedFragment extends Fragment {
 //        constructor PostsAdapter used to create an instance of that class
 //        adapter knows the data and how to render each item
 //        set own post adapter to saved fragment
+//        calling a constructor
+//        created the instance
+//        set post adapter to recycler view
+//        reycler view has the post adapter, knows how to be rendered
         viewcreated.setAdapter(new PostsAdapter(postList));
 //        linear layout manager: one item per row or column
 //        grid layout manager: grid view
+//        how the items are going to render relative to each other
         viewcreated.setLayoutManager(new LinearLayoutManager(view.getContext()));
     }
     // recycler view is broader definition, list view wish a list of times and view holder represents every item
@@ -72,10 +76,19 @@ public class SavedFragment extends Fragment {
     }
     //each post has title, content
     public class PostsAdapter extends RecyclerView.Adapter<ViewHolder> {
+//        member inside the class
+//        similar to a variable, give it a type, name, value, has a descriptor "private"
+//        public means whenever you have a post adapter you can say PostsAdapter.postList
+//        this member is accessable to everything inside the class
         private List<Post> postList;
 
         // Pass in the contact array into the constructor
 //    you need adapter for saved fragment
+//        method name and return type is the same thing
+//        method name and class thing are the same
+//        put the input into private variables
+//        taking the posts, and putting whatever the input into it's own post
+//        special method, used to instantiate (creating a new thing) the class
 
         public PostsAdapter(List<Post> posts) {
             postList = posts;
@@ -89,14 +102,19 @@ public class SavedFragment extends Fragment {
 //        than create the view holder so that adapter knows how to create each view holder.
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             Context context = parent.getContext();
+//            inflate makes the layout appear (magic)
+//            draws layout on devices
             LayoutInflater inflater = LayoutInflater.from(context);
 
             // Inflate the custom layout
+//            getting the view
             View contactView = inflater.inflate(R.layout.saved_fragment_items, parent, false);
 
             // Return a new holder instance
-            ViewHolder viewHolder = new ViewHolder(contactView);
-            return viewHolder;
+//            inflating viewHolder
+//            calling the constructor of viewHolder to pass in the contactView, creating viewHolder
+//
+            return new ViewHolder(contactView);
         }
 
         @Override
@@ -106,15 +124,20 @@ public class SavedFragment extends Fragment {
 //        process to put data into the view holder, specific position than we set data into each text view
 //        create the view holder and onbind view holder look for specific item that is supposed to be with the view than
 //        get the data from that view so the data shows up
+
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            //        position: every time you want to add different data to a new view holder, helps get the right data
             Post post = postList.get(position);
+//            title text view is holder title
             TextView titletextview = holder.title;
+//            putting post title into the view
             titletextview.setText(post.title());
             TextView contenttextview = holder.content;
             contenttextview.setText(post.content());
 
         }
-
+//how many items inside the list
+//        returns an integer
         @Override
         public int getItemCount() {
             return postList.size();
