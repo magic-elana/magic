@@ -11,13 +11,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.magic.elana.data.Post;
+import com.magic.elana.data.database.local.PostRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.magic.elana.data.database.local.Post.getFromModel;
 
 public class HomeFragment extends Fragment {
     @Override
@@ -35,17 +40,40 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         List<Post> postList = new ArrayList<>();
-        postList.add(Post.builder().title("Hi").content("content").build());
-        postList.add(Post.builder().title("title").content("another post").build());
 //        has to have recycler view in homefragment.xml wish id.rvContacts in it
         RecyclerView viewcreated = view.findViewById(R.id.rvContacts);
 //        constructor PostsAdapter used to create an instance of that class
 //        adapter knows the data and how to render each item
 //        set own post adapter to saved fragment
-        viewcreated.setAdapter(new PostsAdapter(postList));
+        PostsAdapter postsAdapter = new PostsAdapter(postList);
+        viewcreated.setAdapter(postsAdapter);
 //        linear layout manager: one item per row or column
 //        grid layout manager: grid view
         viewcreated.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        PostRepository postRepository = new PostRepository(getActivity().getApplication());
+        LiveData<List<com.magic.elana.data.database.local.Post>> allPosts = postRepository.getAllPosts();
+        final MutableLiveData<List<Post>> allLivePost = new MutableLiveData<>();
+        allPosts.observe(getViewLifecycleOwner(),
+                list -> {
+                    List<com.magic.elana.data.database.local.Post> posts = allPosts.getValue();
+                    List<com.magic.elana.data.Post> livePostList = new ArrayList<>();
+                    for (com.magic.elana.data.database.local.Post post : posts) {
+                        livePostList.add(com.magic.elana.data.Post.builder()
+                                .title(post.title)
+                                .content(post.content)
+                                .timeStamp(post.timeStamp)
+                                .uid(post.uid)
+                                .saved(post.saved).build());
+                    }
+                    allLivePost.postValue(livePostList);
+                });
+
+        allLivePost.observe(getViewLifecycleOwner(),
+                list -> postsAdapter.setPosts(list));
+
+        Button button = getView().findViewById(R.id.clear);
+        button.setOnClickListener(v -> postRepository.deleteAll());
+
     }
 // recycler view is broader definition, list view wish a list of times and view holder represents every item
 //    view holder puts whats in view holder into each thin g in the list of recycler view
@@ -83,7 +111,13 @@ public class HomeFragment extends Fragment {
             postList = posts;
         }
 
-        @NonNull
+        void setPosts(List<com.magic.elana.data.Post> posts){
+            this.postList = posts;
+            notifyDataSetChanged();
+        }
+
+
+    @NonNull
         @Override
 //        inflate each specific view holder for each specific view holder we are using layout home fragment items
 //        each viewholder is being created from layout home fragment items
@@ -113,9 +147,8 @@ public class HomeFragment extends Fragment {
             View.OnClickListener clickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    boolean if_clicked = v.isSelected();
-//                    flip the value of if clicked
-                    v.setSelected(!if_clicked);
+                    PostRepository postRepository = new PostRepository(getActivity().getApplication());
+                    postRepository.update(getFromModel(post, false, !post.saved()));
                 }
             };
             // Set item views based on your views and data model
@@ -123,6 +156,11 @@ public class HomeFragment extends Fragment {
             titletextview.setText(post.title());
             TextView contenttextview = holder.content;
             contenttextview.setText(post.content());
+            if (post.saved()) {
+                holder.button.setBackground(getContext().getDrawable(R.drawable.ic_turned_in_black_24dp));
+            } else {
+                holder.button.setBackground(getContext().getDrawable(R.drawable.ic_turned_in_not_black_24dp));
+            }
 
             holder.button.setOnClickListener(clickListener);
         }

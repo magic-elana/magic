@@ -37,7 +37,7 @@ public class DatabaseImpl implements DataBase {
         user.put(Post.TITLE_KEY, post.title());
         user.put(Post.CONTENT_KEY, post.content());
         localDatabase.getPostDao().insert(
-                com.magic.elana.data.database.local.Post.getFromModel(post));
+                com.magic.elana.data.database.local.Post.getFromModel(post, true, false));
 
         // Add a new document with a generated ID
         db.collection("posts")

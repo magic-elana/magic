@@ -1,6 +1,7 @@
 package com.magic.elana;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.magic.elana.data.database.local.Post;
+import com.magic.elana.data.database.local.PostRepository;
 
 //    this is the createfragment class extended by fragment
 // Fragment is the parent class and CreateFragment is one thing inside Fragment, like home and saved fragments
@@ -56,6 +60,14 @@ public class CreateFragment extends Fragment {
 //                sets text in writtenText into text
                 title.setText(writtenTitle);
                 content.setText(writtenContent);
+                title.setText(writtenTitle);
+                content.setText(writtenContent);
+                PostRepository postRepository = new PostRepository(getActivity().getApplication());
+                postRepository.insert(Post.getFromModel(com.magic.elana.data.Post.builder()
+                        .title(title.getText().toString())
+                        .content(content.getText().toString())
+                        .timeStamp(SystemClock.currentThreadTimeMillis())
+                        .saved(false).build(), true, false));
 
             }
         };
